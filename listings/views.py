@@ -64,7 +64,7 @@ class AllHotelRoomsView(views.APIView):
         return Response(response_payload, status=status.HTTP_200_OK)
 
 
-class AvailableListingsApiView(generics.ListAPIView):
+class AvailableListingsView(generics.ListAPIView):
     serializer_class = AvailableListingsSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = HotelRoomFilter

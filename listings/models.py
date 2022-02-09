@@ -55,6 +55,15 @@ class HotelRoom(models.Model):
     room_number = models.CharField(
         max_length=255,
     )
+    price = models.DecimalField(
+        max_digits=6,
+        decimal_places=2,
+        blank=True,
+        null=True,
+    )
+    isBooked = models.BooleanField(default=False, null=True, blank=True)
+    check_in = models.DateField(null=True, blank=True)
+    check_out = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return self.room_number
@@ -75,7 +84,10 @@ class BookingInfo(models.Model):
         on_delete=models.CASCADE,
         related_name="booking_info",
     )
-    price = models.DecimalField(max_digits=6, decimal_places=2)
+    price = models.DecimalField(
+        max_digits=6,
+        decimal_places=2,
+    )
 
     def __str__(self):
         if self.listing:
@@ -92,14 +104,14 @@ class Reservation(models.Model):
         blank=True,
         null=True,
         on_delete=models.CASCADE,
-        related_name="reservation_hotelroom",
+        related_name="reservation",
     )
     hotel_room_type = models.ForeignKey(
         HotelRoomType,
         blank=True,
         null=True,
         on_delete=models.CASCADE,
-        related_name="reservation_hotelroomtype",
+        related_name="reservation",
     )
     check_in = models.DateField(null=True, blank=True)
     check_out = models.DateField(null=True, blank=True)
