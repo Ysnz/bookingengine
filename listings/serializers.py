@@ -8,6 +8,12 @@ class ListingSerializer(serializers.ModelSerializer):
         fields = ["listing_type", "title", "country", "city"]
 
 
+class BookingInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BookingInfo
+        fields = "__all__"
+
+
 class HotelRoomTypeSerializer(serializers.ModelSerializer):
     hotel = ListingSerializer(required=True)
 
@@ -16,15 +22,9 @@ class HotelRoomTypeSerializer(serializers.ModelSerializer):
         fields = ["hotel"]
 
 
-class HotelRoomSerializer(serializers.ModelSerializer):
+class AvailableListingsSerializer(serializers.ModelSerializer):
     hotel_room_type = HotelRoomTypeSerializer(required=True)
 
     class Meta:
         model = HotelRoom
-        fields = "__all__"
-
-
-class BookingInfoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = BookingInfo
-        fields = "__all__"
+        fields = ["hotel_room_type", "price"]
