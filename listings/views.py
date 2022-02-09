@@ -6,11 +6,11 @@ from listings.models import Listing, BookingInfo, HotelRoom
 from .serializers import (
     ListingSerializer,
     BookingInfoSerializer,
-    AvailableListingsSerializer,
+    HotelRoomSerializer,
 )
 
 
-class ListingApiView(views.APIView):
+class ListingView(views.APIView):
     serializer_class = ListingSerializer
 
     def get(self, request):
@@ -28,7 +28,7 @@ class ListingApiView(views.APIView):
         return Response(response_payload, status=status.HTTP_200_OK)
 
 
-class BookingInfoApiView(views.APIView):
+class BookingInfoView(views.APIView):
     serializer_class = BookingInfoSerializer
 
     def get(self, request):
@@ -46,12 +46,12 @@ class BookingInfoApiView(views.APIView):
         return Response(response_payload, status=status.HTTP_200_OK)
 
 
-class AllHotelRoomsApiView(views.APIView):
-    serializer_class = AvailableListingsSerializer
+class HotelRoomsView(views.APIView):
+    serializer_class = HotelRoomSerializer
 
     def get(self, request):
         hotelRoom = HotelRoom.objects.all().order_by("price")
-        serializer = AvailableListingsSerializer(hotelRoom, many=True)
+        serializer = HotelRoomSerializer(hotelRoom, many=True)
 
         data = serializer.data
 
@@ -78,8 +78,8 @@ class HotelRoomFilter(filters.FilterSet):
         fields = ["check_in", "check_out", "max_price"]
 
 
-class AvailableListingsApiView(generics.ListAPIView):
-    serializer_class = AvailableListingsSerializer
+class AvailableListingsView(generics.ListAPIView):
+    serializer_class = HotelRoomSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = HotelRoomFilter
     queryset = HotelRoom.objects.all().order_by("price")
