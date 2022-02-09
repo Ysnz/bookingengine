@@ -2,15 +2,17 @@ from unicodedata import name
 from django.urls import path
 
 from .views import (
+    health_check,
     ListingView,
     BookingInfoView,
-    AllHotelRoomsView,
+    AllRoomsView,
     AvailableListingsView,
 )
 
 urlpatterns = [
-    path("listings/", ListingView.as_view()),
-    path("bookingInfos/", BookingInfoView.as_view()),
-    path("allRooms/", AllHotelRoomsView.as_view()),
-    path("available_listings/", AvailableListingsView.as_view()),
+    path("health_check/", health_check, name="health_check"),
+    path("listing/", ListingView.as_view(), name="listings"),
+    path("bookingInfo/", BookingInfoView.as_view(), name="bookingInfos"),
+    path("allRooms/", AllRoomsView.as_view(), name="allRooms"),
+    path("units/", AvailableListingsView.as_view(), name="units"),
 ]

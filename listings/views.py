@@ -3,6 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 from rest_framework import status, views, generics
 from rest_framework.response import Response
+from django.http import HttpResponse
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import Listing, BookingInfo, HotelRoom
 from .serializers import (
@@ -11,6 +12,10 @@ from .serializers import (
     AvailableListingsSerializer,
 )
 from .filters import HotelRoomFilter
+
+
+def health_check(request):
+    return HttpResponse(b"Success!")
 
 
 class ListingView(views.APIView):
@@ -47,7 +52,7 @@ class BookingInfoView(views.APIView):
         return Response(response_payload, status=status.HTTP_200_OK)
 
 
-class AllHotelRoomsView(views.APIView):
+class AllRoomsView(views.APIView):
     serializer_class = AvailableListingsSerializer
 
     def get(self, request):

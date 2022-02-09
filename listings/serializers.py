@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from listings.models import HotelRoom, HotelRoomType, Listing, BookingInfo
+from .models import HotelRoom, HotelRoomType, Listing, BookingInfo
 
 
 class ListingSerializer(serializers.ModelSerializer):

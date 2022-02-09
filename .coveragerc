@@ -1,0 +1,23 @@
+# .coveragerc to control coverage.py
+[run]
+source = '.'
+omit =
+   *manage.py
+      
+   #*/tests/*
+   *__init__.py  
+   *apps.py
+   *migrations/*
+   *asgi.py
+   *wsgi.py
+   *logger.py
+   *.txt
+   *factories.py
+   factories.py
+   logs/*
+   
+
+[report]
+#fail_under = 100
+show_missing = True
+#skip_covered = True
